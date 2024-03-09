@@ -43,11 +43,15 @@ This project is licensed under the MIT License.
 </br>
 </br>
 The coordinates of a map cannot be found in a wide range
-<br>
+</br>
+</br>
 <img width="1440" alt="Screenshot 2024-03-09 at 11 10 46 AM" src="https://github.com/achiever-21/Simplifying-Location-Identification/assets/132044694/0d7f3cf4-6305-4e78-aea0-a1cdb9015aaa">
-<br>
+</br>
+</br>
 The coordinates can be searched through the search bar and it returns all the related wikipedia articles
-<br>
+</br>
+</br>
 <img width="1440" alt="Screenshot 2024-03-09 at 11 12 08 AM" src="https://github.com/achiever-21/Simplifying-Location-Identification/assets/132044694/8d10c1e5-b9b5-4174-bc44-eb6a7158cd96">
-<br>
+</br>
+</br>
 The coordinates can be accessed through the click of the user and returns all the realated wikipedia articles
