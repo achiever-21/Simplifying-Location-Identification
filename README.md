@@ -27,7 +27,7 @@ View Wikipedia articles and OpenStreetMap data for the selected locations.
 HTML/CSS/JAVASCRIPT 
 Leaflet.js: Open-source JavaScript library for interactive maps.
 ### Backend:
-Wikipedia API: Accesses Wikipedia con<img width="1440" alt="Screenshot 2024-03-09 at 11 09 38 AM" src="https://github.com/achiever-21/Simplifying-Location-Identification/assets/132044694/5d7d25c5-fc7b-4b58-8d37-5954d4334e12">
+Wikipedia API: Accesses Wikipedia con
 tent for articles based on coordinates.
 OpenStreetMap API: Provides geographic data and map rendering.
 
@@ -36,5 +36,16 @@ Contributions are welcome! If you have any ideas for improvements or new feature
 
 ## License
 This project is licensed under the MIT License.
+
+## Screenshots
+<img width="1440" alt="Screenshot 2024-03-09 at 11 09 38 AM" src="https://github.com/achiever-21/Simplifying-Location-Identification/assets/132044694/5d7d25c5-fc7b-4b58-8d37-5954d4334e12">
+
+The coordinates of a map cannot be found in a wide range
+
 <img width="1440" alt="Screenshot 2024-03-09 at 11 10 46 AM" src="https://github.com/achiever-21/Simplifying-Location-Identification/assets/132044694/0d7f3cf4-6305-4e78-aea0-a1cdb9015aaa">
+
+The coordinates can be searched through the search bar and it returns all the related wikipedia articles
+
 <img width="1440" alt="Screenshot 2024-03-09 at 11 12 08 AM" src="https://github.com/achiever-21/Simplifying-Location-Identification/assets/132044694/8d10c1e5-b9b5-4174-bc44-eb6a7158cd96">
+
+The coordinates can be accessed through the click of the user and returns all the realated wikipedia articles
