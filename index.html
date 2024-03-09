@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map with Wikipedia Integration</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h1 id="pageTitle">Map with Wikipedia Integration</h1>
+  </div>
+  <div class="header">
+    <div class="search-container">
+      <!-- Input for location search -->
+      <input type="text" id="location" placeholder="Enter location name">
+      <!-- Button to trigger location search -->
+      <button id="search-button" onclick="searchLocation()">Search</button>
+    </div>
+    <div id="buttons-container">
+      <!-- Button to get live location -->
+      <button class="button" onclick="getLiveLocation()">Live Location</button>
+      <!-- Button to copy coordinates -->
+      <button class="button" onclick="copyCoordinates()">Copy Coordinates</button>
+    </div>
+  </div>
+  <!-- Map container -->
+  <div id="map"></div>
+  <!-- Container for Wikipedia articles -->
+  <div class="article-container" id="articles-container"></div>
+
+  <!-- Leaflet library -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize map with Leaflet
+    var map = L.map('map').setView([51.505, -0.09], 2);
+    var marker; // Marker variable to store marker object
+
+    // Add OpenStreetMap tile layer to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Function to create marker at given latitude and longitude
+    function createMarker(lat, lon) {
+      if (marker) {
+        map.removeLayer(marker);
+      }
+      marker = L.marker([lat, lon]).addTo(map);
+    }
+
+    // Function to search location using Nominatim API
+    function searchLocation() {
+      var locationName = document.getElementById('location').value;
+      fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + locationName)
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.length > 0) {
+            var lat = parseFloat(data[0].lat);
+            var lon = parseFloat(data[0].lon);
+            map.setView([lat, lon], 13);
+            createMarker(lat, lon);
+            fetchArticles(lat, lon);
+          } else {
+            alert('Location not found');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Function to handle map click event
+    map.on('click', function(e) {
+      var lat = e.latlng.lat;
+      var lon = e.latlng.lng;
+      createMarker(lat, lon);
+      fetchArticles(lat, lon);
+    });
+
+    // Function to get live location using Geolocation API
+    function getLiveLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          var lat = position.coords.latitude;
+          var lon = position.coords.longitude;
+          map.setView([lat, lon], 13);
+          createMarker(lat, lon);
+          fetchArticles(lat, lon);
+        }, error => {
+          console.error('Error:', error);
+          alert('Error getting your location');
+        });
+      } else {
+        alert('Geolocation is not supported by this browser.');
+      }
+    }
+
+    // Function to fetch Wikipedia articles based on coordinates
+    function fetchArticles(lat, lon) {
+      const url = `https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&list=geosearch&gscoord=${lat}|${lon}&gsradius=10000&gslimit=100`;
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const articlesContainer = document.getElementById('articles-container');
+          articlesContainer.innerHTML = '';
+          if (data.query && data.query.geosearch.length > 0) {
+            const articles = data.query.geosearch;
+            articles.forEach(article => {
+              const wikiLink = `https://en.wikipedia.org/wiki/${article.title}`;
+              const linkElement = document.createElement('a');
+              linkElement.href = wikiLink;
+              linkElement.textContent = article.title;
+              linkElement.className = 'article-link';
+              linkElement.target = '_blank';
+              articlesContainer.appendChild(linkElement);
+            });
+          } else {
+            articlesContainer.innerHTML = 'No Wikipedia articles found near this location.';
+          }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    // Function to copy coordinates to clipboard
+    function copyCoordinates() {
+      var lat = marker.getLatLng().lat.toFixed(6);
+      var lon = marker.getLatLng().lng.toFixed(6);
+      var coordinates = lat + ', ' + lon;
+
+      navigator.clipboard.writeText(coordinates).then(function() {
+        console.log('Coordinates copied to clipboard:', coordinates);
+        alert('Coordinates copied to clipboard: ' + coordinates);
+      }, function(err) {
+        console.error('Failed to copy coordinates: ', err);
+        alert('Failed to copy coordinates.');
+      });
+    }
+  </script>
+</body>
+</html>
