@@ -1,0 +1,4 @@
+'https://nominatim.openstreetmap.org/search?format=json&q='+locationname
+`https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&list=geosearch&gscoord=${lat}|${lon}&gsradius=10000&gslimit=100`
+
+      
