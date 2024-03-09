@@ -40,7 +40,8 @@ This project is licensed under the MIT License.
 ## Screenshots
 
 <img width="1440" alt="Screenshot 2024-03-09 at 11 09 38 AM" src="https://github.com/achiever-21/Simplifying-Location-Identification/assets/132044694/5d7d25c5-fc7b-4b58-8d37-5954d4334e12">
-<br>
+</br>
+</br>
 The coordinates of a map cannot be found in a wide range
 <br>
 <img width="1440" alt="Screenshot 2024-03-09 at 11 10 46 AM" src="https://github.com/achiever-21/Simplifying-Location-Identification/assets/132044694/0d7f3cf4-6305-4e78-aea0-a1cdb9015aaa">
