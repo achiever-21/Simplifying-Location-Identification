@@ -1,7 +1,7 @@
 # Simplifying-Location-Identification
 Discover the world with an interactive map enriched by Wikipedia content, seamlessly integrated using  OpenStreetMap and Wikipedia APIs.
 
-### Map with Wikipedia Integration
+## Map with Wikipedia Integration
 This project aims to provide a seamless integration of Wikipedia articles and OpenStreetMap data onto an interactive map interface. By utilizing the Wikipedia API for fetching articles based on coordinates and OpenStreetMap API for mapping, users can explore locations of interest and access relevant Wikipedia articles directly from the map interface.
 
 ## Features
